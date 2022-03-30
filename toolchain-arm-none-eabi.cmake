@@ -14,11 +14,20 @@ set(CMAKE_RANLIB                    ${BAREMETAL_ARM_TOOLCHAIN_PATH}arm-none-eabi
 set(CMAKE_SIZE                      ${BAREMETAL_ARM_TOOLCHAIN_PATH}arm-none-eabi-size${CMAKE_EXECUTABLE_SUFFIX} CACHE INTERNAL "")
 set(CMAKE_STRIP                     ${BAREMETAL_ARM_TOOLCHAIN_PATH}arm-none-eabi-strip${CMAKE_EXECUTABLE_SUFFIX} CACHE INTERNAL "")
 
-
-set(CMAKE_C_FLAGS                   "-Wall -Os -g -mcpu=cortex-m0 -mthumb -ffunction-sections -fdata-sections" CACHE INTERNAL "")
+# Need -fno-builtin option for LTO as LTO will treat retarget functions as
+# unused without -fno-builtin option
+set(CMAKE_C_FLAGS                   "-Wall -mcpu=cortex-m0 -mthumb -flto -fno-builtin -ffunction-sections -fdata-sections" CACHE INTERNAL "")
 set(CMAKE_CXX_FLAGS                 "${CMAKE_C_FLAGS} -fno-exceptions" CACHE INTERNAL "")
 set(CMAKE_ASM_FLAGS                 "${CMAKE_C_FLAGS} -x assembler-with-cpp" CACHE INTERNAL "")
 
+set(CMAKE_C_FLAGS_DEBUG             "-Os -g" CACHE INTERNAL "")
+set(CMAKE_C_FLAGS_RELEASE           "-Os -DNDEBUG" CACHE INTERNAL "")
+set(CMAKE_CXX_FLAGS_DEBUG           "${CMAKE_C_FLAGS_DEBUG}" CACHE INTERNAL "")
+set(CMAKE_CXX_FLAGS_RELEASE         "${CMAKE_C_FLAGS_RELEASE}" CACHE INTERNAL "")
+set(CMAKE_ASM_FLAGS_DEBUG           "${CMAKE_C_FLAGS_DEBUG}" CACHE INTERNAL "")
+set(CMAKE_ASM_FLAGS_RELEASE         "${CMAKE_C_FLAGS_RELEASE}" CACHE INTERNAL "")
+
+set(CMAKE_EXE_LINKER_FLAGS "-Xlinker --gc-sections --specs=nano.specs" CACHE INTERNAL "")
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)

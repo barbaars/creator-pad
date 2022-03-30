@@ -1,5 +1,6 @@
-build
+build*
 .vscode
 src/library/CMSIS/*
 !src/library/CMSIS/Include
-
+src/application/version.c
+src/loader/version.c

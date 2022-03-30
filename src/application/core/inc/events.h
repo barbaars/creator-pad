@@ -1,0 +1,56 @@
+#ifndef _EVENTS_H_ 
+#define _EVENTS_H_
+
+#define TICKS_MULTIPLIER 5 // Multiply ticks with this number to get 10ms steps
+
+enum events
+{
+    EVENT_NO_EVENT,
+    EVENT_DUMMY,
+    EVENT_SYSTICK,
+    EVENT_CYCLIC_1,
+    EVENT_CYCLIC_2,
+    EVENT_CYCLIC_3,
+    EVENT_CYCLIC_4,
+    EVENT_CYCLIC_5,
+    EVENT_CYCLIC_6,
+    EVENT_CYCLIC_7,
+    EVENT_CYCLIC_8,
+    EVENT_USB,
+    EVENT_USB_SUSPEND,
+    EVENT_USB_RESUME,
+    EVENT_USB_VCOM_OPENED,
+    EVENT_USB_VCOM_CLOSED,
+    EVENT_USB_VCOM_RX,
+    EVENT_KEY_ANY_PRESSED,
+    EVENT_KEY_PLAY_PRESSED,
+    EVENT_KEY_REVERSE_PRESSED,
+    EVENT_KEY_FORWARD_PRESSED,
+    EVENT_KEY_STOP_PRESSED,
+    EVENT_KEY_RECORD_PRESSED,
+    EVENT_KEY_REPEAT_PRESSED,
+    EVENT_KEY_BANK_PRESSED,
+    EVENT_KEY_SPECIAL_RIGHT_PRESSED,
+    EVENT_KEY_SPECIAL_LEFT_PRESSED,
+    EVENT_PAD_ANY_PRESSED,
+    EVENT_PAD_1_PRESSED,
+    EVENT_PAD_2_PRESSED,
+    EVENT_PAD_3_PRESSED,
+    EVENT_PAD_4_PRESSED,
+    EVENT_PAD_5_PRESSED,
+    EVENT_PAD_6_PRESSED,
+    EVENT_PAD_7_PRESSED,
+    EVENT_PAD_8_PRESSED,
+    EVENT_PAD_9_PRESSED,
+    EVENT_PAD_10_PRESSED,
+    EVENT_PAD_11_PRESSED,
+    EVENT_PAD_12_PRESSED,
+    EVENT_MAX
+};
+
+typedef void(*event_handler_t)(enum events e, int ticks);
+
+int event_subscribe(enum events event, event_handler_t handler);
+int event_publish(enum events event);
+
+#endif

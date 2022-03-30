@@ -1,0 +1,9 @@
+[submodule "src/library/lwshell"]
+	path = src/library/lwshell
+	url = https://github.com/MaJerle/lwshell.git
+[submodule "src/library/NUC123BSP"]
+	path = src/library/NUC123BSP
+	url = https://github.com/barbaars/NUC123BSP.git
+[submodule "src/library/cpputest"]
+	path = src/library/cpputest
+	url = https://github.com/cpputest/cpputest.git
